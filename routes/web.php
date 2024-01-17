@@ -13,4 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+ray()->showQueries();
+
 Route::view('/', 'welcome')->name('home');

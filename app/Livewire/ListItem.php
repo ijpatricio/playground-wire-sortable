@@ -7,20 +7,35 @@ use Livewire\Component;
 
 class ListItem extends Component
 {
-    public int|string $id;
-
-    public Task|null $task = null;
+    public int|string $taskId;
 
     public string $description = '';
 
-    public function mount($id)
+    public function mount()
     {
-        if (! str($id)->isUlid()) {
-            $this->task = Task::find($id);
-            $this->description = $this->task->description;
-        } else {
-            $this->task = new Task;
+        if ($this->isTaskInDB()) {
+            $this->description = Task::find($this->taskId)->description;
         }
+    }
+
+    public function isTaskInDB(): bool
+    {
+        if (str($this->taskId)->isUlid()) {
+            return false;
+        }
+         return true;
+    }
+
+    public function save()
+    {
+        if ($this->isTaskInDB()) {
+            Task::whereId($this->taskId)->update(['description' => $this->description]);
+            return;
+        }
+
+        $task = Task::create(['description' => $this->description]);
+
+        $this->taskId = $task->id;
     }
 
     public function render()

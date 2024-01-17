@@ -1,4 +1,3 @@
-
 <div>
     <div class="my-8">
         DUMP IDs
@@ -24,9 +23,30 @@
         The List
     </div>
 
-    @foreach($this->ids as $taskId)
-        <div wire:key="item-{{ $taskId }}" class="my-4">
-            <livewire:list-item :key="$taskId" :id="$taskId"/>
-        </div>
-    @endforeach
+
+    <div
+        x-data="{
+            sortableList: null
+        }"
+        x-init="sortableList = Sortable.create($el, {
+            animation: 300,
+            draggable: '[x-sortable-item]',
+            handle: '[x-sortable-handle]',
+            dataIdAttr: 'x-sortable-item',
+            ghostClass: 'opacity-20',
+        })"
+        @dragend.stop="
+            $wire.saveOrder(sortableList.toArray())
+        "
+    >
+        @foreach($this->ids as $taskId)
+            <div id="item-{{ $taskId }}" wire:key="item-{{ $taskId }}" class="my-4" x-sortable-item="{{ $taskId }}">
+                <livewire:list-item :key="$taskId" :$taskId />
+            </div>
+        @endforeach
+    </div>
+
+{{--    @include('scripts')--}}
+
 </div>
+

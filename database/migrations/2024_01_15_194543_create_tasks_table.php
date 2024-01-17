@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Project::class);
             $table->string('description');
             $table->boolean('is_complete')->default(false);
             $table->timestamps();
