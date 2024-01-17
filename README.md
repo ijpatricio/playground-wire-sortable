@@ -25,5 +25,7 @@ php artisan key:generate
 touch database/database.sqlite
 php artisan migrate:fresh --seed
 php artisan serve
+npm ci
+npm run dev # or npm run build
 ```
 
