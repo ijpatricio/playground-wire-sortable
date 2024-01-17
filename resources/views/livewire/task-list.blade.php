@@ -23,7 +23,6 @@
         The List
     </div>
 
-
     <div
         x-data="{
             sortableList: null
@@ -39,14 +38,11 @@
             $wire.saveOrder(sortableList.toArray())
         "
     >
-        @foreach($this->ids as $taskId)
+            <?php foreach ($this->ids as $taskId): ?>
             <div id="item-{{ $taskId }}" wire:key="item-{{ $taskId }}" class="my-4" x-sortable-item="{{ $taskId }}">
                 <livewire:list-item :key="$taskId" :$taskId />
             </div>
-        @endforeach
+            <?php endforeach; ?>
     </div>
-
-{{--    @include('scripts')--}}
-
 </div>
 
