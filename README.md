@@ -15,7 +15,9 @@ The LW marker gets out of order and panics things! (Not LW fault, but it's a dif
 
 ###  Up and running
 
-The usual:
+You can use GitPod to have a fully running setup in under a minute: https://gitpod.io/?autostart=true#https://github.com/ijpatricio/playground-wire-sortable
+
+Or setup, locally, the usual:
 ```
 cp .env.example
 composer install --ignore-platform-reqs
